@@ -16,7 +16,7 @@ export default class Counter extends Component {
 
     render() {
         return (
-            <div>
+            <div className="hoge">
                 Count: {this.state.count}
                 <button onClick={this.handleClick.bind(this)}>increment</button>
             </div>
@@ -24,14 +24,3 @@ export default class Counter extends Component {
     }
 }
 
-const style = {
-    container: {
-      color: 'blue',
-      fontSize: 32
-    }
-  };
-  
-  ReactDOM.render(
-    <h1 style={style.container}>Hello, World</h1>,
-    document.getElementById('form')
-  );

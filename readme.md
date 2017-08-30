@@ -27,3 +27,13 @@ http://qiita.com/yokoh9/items/4ea3fa0e24623e53fc69
 > npm-install-missing
 
 導入結構面倒かも・・・
+
+react-domは個別に読み込まさないとだめになった模様
+
+ネットの情報だと
+import ReactDOM from 'react-dom';
+import ReactDom from 'react-dom';
+
+と2通りの書き方がある罠があるので
+どっちでもいいのだけど「ReactDOM」に名称統一
+

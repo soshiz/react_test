@@ -17,10 +17,10 @@ loader: 'babel-loader',
 
 入れておかないとエラー履くかも。
 
-ここが非常に役に立った↓
+ここが役に立った↓
 http://qiita.com/yokoh9/items/4ea3fa0e24623e53fc69
 
-※
+※念のためnode.js継ぎ足しておく
 【Node.js】足りないモジュールをたったの一行でインストールするコマンド
 
 > npm install -g npm-install-missing

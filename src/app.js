@@ -1,16 +1,111 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import Counter from './counter.js';
+
+
+
+'use strict';
+import { createStore } from "redux";
+
+//console.log(store.getState());
+
+// ToDo を一意に特定できる ID
+let nextTodoId = 0;
+
+// ToDo の追加
+const addToDo = (text) => {
+    return {
+        type: 'ADD_TODO',
+        id: nextTodoId++,
+        text: text,
+    };
+}
+// ToDo の完了／未完了
+const toggleToDo = (id) => {
+    return {
+        type: 'TOGGLE_TODO',
+        id: id,
+    };
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+      case 'ADD_TODO':
+          return {
+              todo: state.todo.concat({
+                  id: action.id,
+                  text: action.text,
+                  completed: false
+              })
+          };
+      case 'TOGGLE_TODO':
+          return {
+              todo: state.todo.map(t => {
+                  if (t.id !== action.id) {
+                      return t;
+                  }
+
+                  return Object.assign({}, t, {completed: !t.completed});
+              })
+          };
+      default:
+          return state;
+  }
+}
+
+const store = createStore(reducer, {todo: []});
+
+// Store に変更があれば、state を console に出力する
+store.subscribe(() => console.log(store.getState()));
+
+console.log("買い物を追加");
+store.dispatch(addToDo("買い物に行く"));
+
+console.log("銀行を追加");
+store.dispatch(addToDo("銀行に行く"));
+
+console.log("銀行に行くのをDone");
+store.dispatch(toggleToDo(1));
+
+
+
+ReactDOM.render(
+  <MuiThemeProvider>
+      <Counter />
+  </MuiThemeProvider>,
+  document.getElementById('root')
+);
 
 
 var App = {
     render:  () => {
-        ReactDom.render(
+        ReactDOM.render(
             <Counter />,
             document.getElementById('root')
         );
     }
 };
+
+class Hoge extends React.Component {
+  render(){
+    return(
+      <div className="hoge">
+        中身
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <Hoge />,
+  document.getElementById('form2')
+);
 
 class SampleComponent2 extends React.Component {
   render() {
@@ -30,8 +125,8 @@ class SampleComponent extends React.Component {
         ]
       }
       // ライフサイクル外の関数から this を参照するための bind
-      //this.onClick = this.onClick.bind(this);
-      //this.renderList = this.renderList.bind(this);
+      this.onClick = this.onClick.bind(this);
+      this.renderList = this.renderList.bind(this);
     }
   
     onClick() {
@@ -60,7 +155,7 @@ class SampleComponent extends React.Component {
 
 //App.render();
 
-//ReactDom.render(<SampleComponent/>, document.getElementById('form'));
+//ReactDOM.render(<SampleComponent/>, document.getElementById('form'));
 
 
 //コンポーネントの作成
@@ -78,20 +173,20 @@ class MyComponent extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="hoge">
         myState : {this.state.myState}
       </div>
     )
   }
 };
  //コンポーネントの描画
-ReactDom.render(
+ReactDOM.render(
   <MyComponent />,
   document.getElementById('form')
 );
 
 
-ReactDom.render(
-  <SampleComponent />,
-  document.getElementById('root')
-);
+// ReactDOM.render(
+//   <SampleComponent />,
+//   document.getElementById('root')
+// );

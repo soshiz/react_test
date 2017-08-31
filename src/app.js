@@ -4,13 +4,61 @@ import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import Counter from './counter.js';
 
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import { AppBar, MenuItem, Drawer} from 'material-ui';
+
+const App = () => (
+  <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+    <AppBar title="My AppBar" />
+  </MuiThemeProvider>
+);
+
+// ReactDOM.render(
+//   <App />,
+//   document.getElementById('app')
+// );
 
 
-'use strict';
+
+class NavBar extends React.Component{
+  render() {
+    return (
+      <MuiThemeProvider>
+        <div>
+          <Drawer
+            docked={false}
+            width={200}
+            open={this.props.open}
+            onRequestChange={() => this.props.onToggle()}
+          >
+            <MenuItem>React</MenuItem>
+            <MenuItem>Redux</MenuItem>
+            <MenuItem>React Router</MenuItem>
+            <MenuItem>Material UI</MenuItem>
+            <MenuItem>Electron</MenuItem>
+          </Drawer>
+          <AppBar
+            title="タイトル"
+            onLeftIconButtonTouchTap={ () => this.props.onToggle()}
+          />
+        </div>
+      </MuiThemeProvider>
+    );
+  }
+}
+
+ReactDOM.render(
+  <NavBar />,
+  document.getElementById('app')
+);
+
+
+
 import { createStore } from "redux";
 
 //console.log(store.getState());
@@ -82,15 +130,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-
-var App = {
-    render:  () => {
-        ReactDOM.render(
-            <Counter />,
-            document.getElementById('root')
-        );
-    }
-};
 
 class Hoge extends React.Component {
   render(){

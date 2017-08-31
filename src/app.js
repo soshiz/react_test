@@ -196,6 +196,7 @@ class SampleComponent extends React.Component {
 
 //ReactDOM.render(<SampleComponent/>, document.getElementById('form'));
 
+//aaa
 
 //コンポーネントの作成
 class MyComponent extends React.Component {

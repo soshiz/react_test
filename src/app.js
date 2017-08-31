@@ -43,7 +43,7 @@ class NavBar extends React.Component{
             <MenuItem>Electron</MenuItem>
           </Drawer>
           <AppBar
-            title="タイトル"
+            title="React Study"
             onLeftIconButtonTouchTap={ () => this.props.onToggle()}
           />
         </div>
@@ -196,7 +196,6 @@ class SampleComponent extends React.Component {
 
 //ReactDOM.render(<SampleComponent/>, document.getElementById('form'));
 
-//aaaaaaa
 
 //コンポーネントの作成
 class MyComponent extends React.Component {
